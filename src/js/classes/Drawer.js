@@ -26,20 +26,28 @@ export class Drawer {
   }
 
   drawLine(x1, y1, x2, y2, r, g, b) {
-    const c1 = y2 - y1;
-    const c2 = x2 - x1;
+    const c1 = Math.abs(y2 - y1);
+    const c2 = Math.abs(x2 - x1);
+    let error = 0;
+    const deltaerr = c1 + 1;
+    let y = y1;
+    let diry = y2 - y1;
 
-    const length = Math.sqrt(c1 * c1 + c2 * c2);
+    if (diry > 0) {
+      diry = 1;
+    }
 
-    const xStep = c2 / length;
-    const yStep = c1 / length;
+    if (diry < 0) {
+      diry = -1;
+    }
 
-    for (let i = 0; i < length; i++) {
-      this.drawPixel(
-        Math.trunc(x1 + xStep * i),
-        Math.trunc(y1 + yStep * i),
-        r, g, b,
-      );
+    for (let x = x1; x2 > x1 ? x <= x2 : x >= x2; x2 > x1 ? x++ : x--) {
+      this.drawPixel(x, y, r, g, b);
+      error += deltaerr;
+      if (error >= 1) {
+        y += diry;
+        error -= c2 + 1;
+      }
     }
   }
 }

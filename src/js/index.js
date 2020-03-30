@@ -22,11 +22,5 @@ drawer.drawPixel(10, 20, 0, 0, 255);
 // применить все изменения пикселей в массиве к элементу canvas
 ctx.putImageData(imageData, 0, 0);
 
-let x = 10;
-setInterval(() => {
-  drawer.clearSurface();
-  drawer.drawPixel(x++, 20, 0, 0, 255);
-  ctx.putImageData(imageData, 0, 0);
-}, 10);
-drawer.drawLine(10, 50, 300, 150, 255, 0, 0);
+drawer.drawLine(300, 150, 350, 50, 255, 0, 0);
 ctx.putImageData(imageData, 0, 0);
